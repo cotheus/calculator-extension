@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Chrome - Extensão Simples e Eficiente</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4285f4;
+            --secondary: #34a853;
+            --accent: #ea4335;
+            --light: #f8f9fa;
+            --dark: #202124;
+            --gray: #5f6368;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .hero-content {
+            flex: 1;
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #3367d6;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            margin-left: 15px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(66, 133, 244, 0.1);
+        }
+        
+        /* Features */
+        .features {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* How to Install */
+        .installation {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .step-number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+        }
+        
+        /* Screenshot */
+        .screenshot {
+            padding: 100px 0;
+            background-color: white;
+            text-align: center;
+        }
+        
+        .screenshot-container {
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .screenshot-container img {
+            max-width: 100%;
+            display: block;
+        }
+        
+        /* CTA */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #3367d6 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta .btn {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .cta .btn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 120px 0 60px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-calculator"></i>
+                    <span>Calculadora Chrome</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#features">Recursos</a>
+                    <a href="#install">Instalação</a>
+                    <a href="#screenshot">Visualização</a>
+                    <a href="#download">Download</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Calculadora Simples para o Chrome</h1>
+                <p>Uma extensão leve e prática que coloca uma calculadora funcional ao alcance de um clique no seu navegador. Perfeita para cálculos rápidos do dia a dia.</p>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn">Instalar Agora</a>
+                    <a href="#screenshot" class="btn btn-secondary">Ver Demo</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB4PSI1MCIgeT0iNTAiIHdpZHRoPSIzMDAiIGhlaWdodD0iMjAwIiByeD0iMTAiIHJ5PSIxMCIgZmlsbD0iI2YxZjFmMSIgc3Ryb2tlPSIjZGRkIi8+CiAgPHJlY3QgeD0iNzAiIHk9IjcwIiB3aWR0aD0iMjYwIiBoZWlnaHQ9IjQwIiByeD0iNSIgcnk9IjUiIGZpbGw9IiNmZmYiLz4KICA8cmVjdCB4PSI3MCIgeT0iMTIwIiB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHJ4PSI1IiByeT0iNSIgZmlsbD0iI2U5ZTllOSIvPgogIDxyZWN0IHg9IjEzMCIgeT0iMTIwIiB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHJ4PSI1IiByeT0iNSIgZmlsbD0iI2U5ZTllOSIvPgogIDxyZWN0IHg9IjE5MCIgeT0iMTIwIiB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHJ4PSI1IiByeT0iNSIgZmlsbD0iI2U5ZTllOSIvPgogIDxyZWN0IHg9IjI1MCIgeT0iMTIwIiB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHJ4PSI1IiByeT0iNSIgZmlsbD0iI2YwYWQ0ZSIvPgogIDxyZWN0IHg9IjcwIiB5PSIxODAiIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgcng9IjUiIHJ5PSI1IiBmaWxsPSIjZTllOWU5Ii8+CiAgPHJlY3QgeD0iMTMwIiB5PSIxODAiIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgcng9IjUiIHJ5PSI1IiBmaWxsPSIjZTllOWU5Ii8+CiAgPHJlY3QgeD0iMTkwIiB5PSIxODAiIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgcng9IjUiIHJ5PSI1IiBmaWxsPSIjZTllOWU5Ii8+CiAgPHJlY3QgeD0iMjUwIiB5PSIxODAiIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgcng9IjUiIHJ5PSI1IiBmaWxsPSIjNWNiODVjIi8+Cjwvc3ZnPg==" alt="Calculadora Chrome Extension">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Recursos Incríveis</h2>
+                <p>Uma extensão simples mas poderosa para suas necessidades de cálculo diário</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Rápido e Leve</h3>
+                    <p>Carregamento instantâneo e uso mínimo de recursos do sistema</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <h3>Interface Intuitiva</h3>
+                    <p>Design limpo e fácil de usar, com botões bem distribuídos</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Operações Básicas</h3>
+                    <p>Soma, subtração, multiplicação, divisão e muito mais</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Acesso Rápido</h3>
+                    <p>Disponível a qualquer momento com um clique no ícone da extensão</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section class="installation" id="install">
+        <div class="container">
+            <div class="section-title">
+                <h2>Como Instalar</h2>
+                <p>Siga estes passos simples para começar a usar a calculadora</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Baixe a Extensão</h3>
+                    <p>Faça o download do arquivo ZIP da extensão</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Extraia os Arquivos</h3>
+                    <p>Extraia o conteúdo para uma pasta em seu computador</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Acesse o Chrome</h3>
+                    <p>Abra chrome://extensions no seu navegador</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Ative o Modo Developer</h3>
+                    <p>Habilite o "Modo do desenvolvedor" no canto superior direito</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Carregue a Extensão</h3>
+                    <p>Clique em "Carregar sem compactação" e selecione a pasta</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshot Section -->
+    <section class="screenshot" id="screenshot">
+        <div class="container">
+            <div class="section-title">
+                <h2>Visualização da Calculadora</h2>
+                <
