@@ -358,52 +358,6 @@
                 margin-top: 15px;
             }
         }
-        
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1001;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-        }
-        
-        .modal h3 {
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-        
-        .modal-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .countdown {
-            font-size: 1.2rem;
-            margin: 20px 0;
-            color: var(--gray);
-        }
-        
-        .countdown-number {
-            font-weight: bold;
-            color: var(--primary);
-        }
     </style>
 </head>
 <body>
@@ -419,7 +373,6 @@
                     <a href="#features">Recursos</a>
                     <a href="#install">Instalação</a>
                     <a href="#screenshot">Visualização</a>
-                    <img src="Screenshot_20250914_203314.png">
                     <a href="#download">Download</a>
                 </div>
             </nav>
@@ -433,7 +386,7 @@
                 <h1>Calculadora Simples para o Chrome</h1>
                 <p>Uma extensão leve e prática que coloca uma calculadora funcional ao alcance de um clique no seu navegador. Perfeita para cálculos rápidos do dia a dia.</p>
                 <div class="hero-buttons">
-                    <a href="#" class="btn" id="download-btn">Instalar Agora</a>
+                    <a href="#download" class="btn">Instalar Agora</a>
                     <a href="#screenshot" class="btn btn-secondary">Ver Demo</a>
                 </div>
             </div>
@@ -499,4 +452,30 @@
                 <div class="step">
                     <div class="step-number">2</div>
                     <h3>Extraia os Arquivos</h3>
-                    
+                    <p>Extraia o conteúdo para uma pasta em seu computador</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Acesse o Chrome</h3>
+                    <p>Abra chrome://extensions no seu navegador</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Ative o Modo Developer</h3>
+                    <p>Habilite o "Modo do desenvolvedor" no canto superior direito</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Carregue a Extensão</h3>
+                    <p>Clique em "Carregar sem compactação" e selecione a pasta</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshot Section -->
+    <section class="screenshot" id="screenshot">
+        <div class="container">
+            <div class="section-title">
+                <h2>Visualização da Calculadora</h2>
+                <img src="Screenshot_20250914_203314.png">
